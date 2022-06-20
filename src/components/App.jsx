@@ -1,7 +1,8 @@
 import React from "react";
 // import { moviesData } from "../moviesData";
 import MovieItem from "./MovieItem";
-import {API_URL, API_KEY_3} from "../utils/api"
+import MovieTabs from "./MovieTabs";
+import { API_URL, API_KEY_3 } from "../utils/api";
 
 class App extends React.Component {
   constructor() {
@@ -9,52 +10,73 @@ class App extends React.Component {
 
     this.state = {
       movies: [],
-      moviesWillWatch: []
+      moviesWillWatch: [],
+      sort_by: "revenue.desc",
     };
   }
 
   componentDidMount() {
-    fetch( `${API_URL}/discover/movie?api_key=${API_KEY_3}`).then((Response) =>{
-      return Response.json()
-    }).then((data) => {
-      this.setState({
-        movies: data.results
+    fetch(
+      `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${this.state.sort_by}`
+    )
+      .then((response) => {
+        return response.json();
       })
-    })
+      .then((data) => {
+        this.setState({
+          movies: data.results,
+        });
+      });
   }
 
-  removeMovie = movie => {
+  removeMovie = (movie) => {
     const updateMovies = this.state.movies.filter(function (item) {
       return item.id !== movie.id;
     });
     this.setState({
-      movies: updateMovies
+      movies: updateMovies,
     });
   };
 
-  addMovieToWillWatch = movie => {
+  addMovieToWillWatch = (movie) => {
     const updateMoviesWillWatcht = [...this.state.moviesWillWatch, movie];
 
     this.setState({
-      moviesWillWatch: updateMoviesWillWatcht
-    })
+      moviesWillWatch: updateMoviesWillWatcht,
+    });
   };
 
-  removeMovieFromWillWatch = movie => {
-    const updateMoviesWillWatcht = this.state.moviesWillWatch.filter(function (item) {
+  removeMovieFromWillWatch = (movie) => {
+    const updateMoviesWillWatcht = this.state.moviesWillWatch.filter(function (
+      item
+    ) {
       return item.id !== movie.id;
     });
     this.setState({
-      moviesWillWatch: updateMoviesWillWatcht
+      moviesWillWatch: updateMoviesWillWatcht,
+    });
+  };
+
+  updateSortBy = (value) => {
+    this.state({
+      sort_by: value,
     });
   };
 
   render() {
-    console.log(this);
+    // console.log(this);
     return (
       <div className="container">
         <div className="row">
           <div className="col-9">
+            <div className="row mb-4">
+              <div className="col-12">
+                <MovieTabs
+                  sort_by={this.state.sort_by}
+                  updateSortBy={this.updateSortBy}
+                />
+              </div>
+            </div>
             <div className="row">
               {this.state.movies.map((movie) => {
                 return (
