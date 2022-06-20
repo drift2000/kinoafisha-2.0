@@ -42,32 +42,6 @@ class MovieItem extends React.Component {
               {this.state.willWatch ? "Remove Will Watch" : "Add Will Watch"}
             </button>
 
-            {/* {this.state.willWatch ? (
-              <button
-                type="button"
-                className="btn btn-success"
-                onClick={() => {
-                  this.setState({
-                    willWatch: false,
-                  });
-                  removeMovieFromWillWatch(movie);
-                }}>
-                Remove Will Watch
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => {
-                  this.setState({
-                    willWatch: true,
-                  });
-                  addMovieToWillWatch(movie)
-                }}
-              >
-                Add Will Watch
-              </button>
-            )} */}
           </div>
           <button type="button" onClick={removeMovie.bind(null, movie)}>
             Delete

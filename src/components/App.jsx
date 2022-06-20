@@ -1,4 +1,3 @@
-// import "./styles.css";
 import React from "react";
 import { moviesData } from "../moviesData";
 import MovieItem from "./MovieItem";
@@ -17,22 +16,15 @@ class App extends React.Component {
     const updateMovies = this.state.movies.filter(function (item) {
       return item.id !== movie.id;
     });
-    // console.log(updateMovies);
-    // this.state.movies = updateMovies;
     this.setState({
       movies: updateMovies
     });
   };
 
   addMovieToWillWatch = movie => {
-    // console.log(1);
-    // this.state.moviesWillWatch.push(movie);
-    // const updateMoviesWillWatcht = [...this.state.moviesWillWatch];
-    // updateMoviesWillWatcht.push(movie);
-
     const updateMoviesWillWatcht = [...this.state.moviesWillWatch, movie];
 
-    this.setState ({
+    this.setState({
       moviesWillWatch: updateMoviesWillWatcht
     })
   };
@@ -41,8 +33,6 @@ class App extends React.Component {
     const updateMoviesWillWatcht = this.state.moviesWillWatch.filter(function (item) {
       return item.id !== movie.id;
     });
-    // console.log(updateMovies);
-    // this.state.movies = updateMovies;
     this.setState({
       moviesWillWatch: updateMoviesWillWatcht
     });
@@ -77,13 +67,5 @@ class App extends React.Component {
     );
   }
 }
-
-// export default function App() {
-//   return (
-//     <div className="App">
-//       {moviesData[0].title}
-//     </div>
-//   );
-// }
 
 export default App;
