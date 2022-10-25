@@ -1,2 +1,2 @@
 # kinoafisha-2.0
-Created with CodeSandbox
+Kinoafisha 2.0 on React

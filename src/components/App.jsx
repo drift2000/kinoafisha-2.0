@@ -16,6 +16,17 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.getMovies();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.sort_by !== this.state.sort_by) {
+      console.log("call API");
+      this.getMovies();
+    }
+  }
+
+  getMovies = () => {
     fetch(
       `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${this.state.sort_by}`
     )
@@ -27,7 +38,7 @@ class App extends React.Component {
           movies: data.results,
         });
       });
-  }
+  };
 
   removeMovie = (movie) => {
     const updateMovies = this.state.movies.filter(function (item) {
@@ -58,7 +69,7 @@ class App extends React.Component {
   };
 
   updateSortBy = (value) => {
-    this.state({
+    this.setState({
       sort_by: value,
     });
   };
